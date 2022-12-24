@@ -10,6 +10,7 @@ function setup() {
   peta = new Map(900, 600); // Setup class Map
   peta.init(); // Memanggil fungsi init pada Class Map
 }
+
 function draw() {
   if(screen === 0){ // screen Awal 
     background('#fae'); //kode warna Pink -> BACKGROUND
@@ -97,4 +98,63 @@ function mousePressed(){
         posy = 200;
         level.setLevel(1);
     }
+}
+
+class Entity { // Class Entity
+  constructor(x, y, width, height) { // Constructor CLass Entity
+    this.x = x;
+    this.y = y;
+    this.height = width;
+    this.width = height;
+  }
+  
+  moveRight(){ // Bergerak Kekanan. x ditambah
+    if(this.x < 600){    
+      this.x += 2;
+    }
+  }
+
+  moveLeft(){ // Bergerak Kekanan. x dikurang
+    if(this.x > 0){
+      this.x -= 2;
+    }
+  }
+
+  moveDown(){ // Bergerak Kekanan. y ditambah
+    if(this.y < 600){
+      this.y += 2;
+    }
+  }
+  moveUp(){ // Bergerak Kekanan. xy dikurang
+    if(this.y > 0){
+      this.y -= 2;
+    }
+  }
+}
+
+class Hero extends Entity{ // Class Hero extend ke Entity -> Hero child Class, Entity Parent Class
+  constructor(x, y, width, height) {
+    super(x, y, width, height);
+    this.life = 1;
+  }
+  
+  display(){
+    fill('#fae'); // Kode Warna Pink
+    rect(this.x, this.y, this.width, this.height); // Membuat bentuk Persegi
+    noFill();
+  }
+  
+  increaseScore(){ // Fungsi Menambah Score
+    score ++;
+  }
+
+  calculateLife(){ // Fungsi Untuk meningkatkan Ukuran Hero
+    if(this.width > 50 && this.height > 50){
+        this.width = 50;
+        this.height = 50;
+    }else{    
+      this.width += 3;
+      this.height += 3; 
+    }
+  }
 }
