@@ -158,3 +158,45 @@ class Hero extends Entity{ // Class Hero extend ke Entity -> Hero child Class, E
     }
   }
 }
+class Monster extends Entity { // class Monster extend Entity, Monster Child Class, Entity ParentClass
+  constructor(x, y, height, width) {
+    super(x, y, height, width);
+    this.life = 1;
+    this.color = 0;
+    this.type = random(0, 2); // Merandom Tipe Monster
+  }
+
+  display(){ // Memunculkan Monster dengan bentuk lingkaran dan 2 tipe warna berbeda
+    stroke(0);
+    if(this.type > 1){
+      this.color = 1;
+      fill('#008000'); // Kode warna Hijau
+      ellipse(this.x, this.y, 10,10);
+      noFill()
+
+    }else{
+      fill('#ff0000'); // Kode Warna Merah
+      ellipse(this.x, this.y, 10,10);
+      noFill()
+    }
+    this.x -= kecepatan; // Kecepatan Bergerak Monster
+  }
+}
+
+class Map{ // Class Mop
+  constructor(width, height) {
+    this.width = width;
+    this.height = height;
+    this.monster = [];
+  }
+
+  init(){ // Menginisialisasi Canvas Awal dan merandom Monster
+    createCanvas(this.width, this.height);
+    for(var i = 0; i < 15; i++){
+      var posY = random(0, this.width);
+      var posX = random(2000, this.height);
+      var mon = new Monster(posX, posY, 10, 10);
+      this.monster.push(mon)
+    }
+  }
+}
