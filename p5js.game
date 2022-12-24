@@ -58,3 +58,28 @@ function draw() {
         peta.monster.push(mon)
       }
     }
+    
+    if (keyIsDown(87)) { // 87 == W
+      hero.moveUp();
+    
+    }else if (keyIsDown(83)) { // 83 == s
+      hero.moveDown();
+    
+    }else if (keyIsDown(65)) { // 65 == A
+      hero.moveLeft();
+    
+    }else if (keyIsDown(68)) { // 68 == D
+      hero.moveRight();
+    }
+
+  }else{
+    background('#000000');
+    fill('#FFFFFF')
+    textSize(20);
+    text('Game Over', width/2 - 50, height/2);
+    textSize(16);
+    text(`Your Score: ${score}`, width/2 - 50, height/2 + 20);
+    text(`Your Level: ${level.getCurentLevel()}`, width/2 - 50, height/2 + 40);
+    text(`Click To Continue!`, width/2 - 50, height/2 + 60);
+  }
+}
