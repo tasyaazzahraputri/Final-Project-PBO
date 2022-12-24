@@ -10,3 +10,51 @@ function setup() {
   peta = new Map(900, 600); // Setup class Map
   peta.init(); // Memanggil fungsi init pada Class Map
 }
+function draw() {
+  if(screen === 0){ // screen Awal 
+    background('#fae'); //kode warna Pink -> BACKGROUND
+    fill('#000000') // -> Warna Teks Hitam
+    textSize(20) // -> Ukuran Teks 20
+    text('Click to Start!', (width/2) - 50, height/2 ); // memuncukklkan Teks pada posisi width / 2 dan height / 2
+    text('Tasya Azzahra Putri - 2117051043', (width/2) - 150, height/2 + 20);
+    text('Nindi Restu Pembayun - 2117051021', (width/2) - 160, height/2 + 40);
+    text('Yuna Meisa Putri - 2117051041', (width/2) - 130, height/2 + 60);
+  
+  }else if(screen === 1){ // Screen Game ketika Mouse di click
+    background('#000000'); // warna Background Hitam
+    fill('#ffffff'); // Warna Tulisan putih
+    text(`Score: ${score}`, 500, 20) // Memunculkan Tulisan Score => Petik ` `, String Formating = ${}
+    text(`Level: ${level.getCurentLevel()}`, 500, 30)
+    hero.display(); // memanggil fungsi Display
+
+    for(var mon of peta.monster){ // Looping Monster
+        mon.display(); // Memanggil fungsi display Monster
+
+        if(dist(mon.x, mon.y, hero.x, hero.y) < 20){ // Mengecek apakah Posisi Hero dan Monster < dari 20
+            peta.monster.splice(peta.monster.indexOf(mon), 1); // Menghapus Monster
+         
+            if(mon.color === 1){ // jika warna = 1
+                hero.calculateLife(); // Menambah ukuran Hero
+                hero.increaseScore(); // Menambah Score
+                
+                if(score % 10 == 0){ // Jika Score Habis dibagi 10
+                    level.increaselevel(); // Level akan Naik
+                    kecepatan += 5; // Speed akan ditambahkan
+                }
+                level.checkLevel(); // Memanggil fungsi Check Level
+            }else{ // Jika color bukan 1
+                screen = 2; // Memanggil screen 2
+            }
+        }
+    }
+
+    for(var mon of peta.monster){ // Looping Monster
+     
+      if(mon.x < 0){ // Jika posisi X monster 0
+        peta.monster.splice(peta.monster.indexOf(mon), 1); 
+        var posY = random(0, 600); // Akan Merandom Monster Baru
+        var posX = random(2000, 600);
+        mon = new Monster(posX, posY, 10, 10);
+        peta.monster.push(mon)
+      }
+    }
