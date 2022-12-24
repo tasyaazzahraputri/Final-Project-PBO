@@ -83,3 +83,18 @@ function draw() {
     text(`Click To Continue!`, width/2 - 50, height/2 + 60);
   }
 }
+
+function mousePressed(){
+	if(screen == 0){//screen awal > jika diklik akan berubah jadi 1
+        screen = 1
+        level.setLevel(1);
+        peta.init();
+    }else if(screen == 2){ // jika diklik akan berubah jadi screen 0
+        screen = 0 // Mereset semua menjadi awal 0
+        score = 0;
+        kecepatan = 5;
+        posx = 10;
+        posy = 200;
+        level.setLevel(1);
+    }
+}
